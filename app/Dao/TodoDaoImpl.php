@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Collection;
 
 class TodoDaoImpl implements TodoDao
 {
-    function create(int $userID, string $title, string $description = null): Todo
+    function create(int $userId, string $title, string $description = null): Todo
     {
-        return Todo::created([
+        return Todo::create([
             'title' => $title,
             'description' => $description,
             'finished' => false,
-            'user_id' => $userID
+            'user_id' => $userId
         ]);
     }
 
@@ -28,5 +28,22 @@ class TodoDaoImpl implements TodoDao
         return Todo::all()->where('user_id', $userId);
     }
 
+    function update(int $id, string $title, bool $finished, string $description = null): Todo
+    {
+        $todo = Todo::find($id);
+
+        $todo->title = $title;
+        $todo->finished = $finished;
+        $todo->description = $description;
+
+        $todo->save();
+        return $todo;
+    }
+
+
+    function delete(int $id): int
+    {
+        return Todo::destroy($id);
+    }
 
 }

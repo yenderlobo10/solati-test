@@ -23,5 +23,5 @@ Route::controller(TodoController::class)
     ->prefix('todos')->group(function () {
         Route::get('/', 'all');
         Route::get('/{userId}', 'allByUser');
-        Route::post('/add', 'store');
+        Route::delete('/{id}', 'delete');
     })->middleware(['auth']);

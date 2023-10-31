@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TodoController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +28,7 @@ Route::get('/', function () {
 });
 
 Route::get('/todos', function () {
-    return Inertia::render('Todos', [
+    return Inertia::render('Todo/Todos', [
         'userId' => Auth::user()->id
     ]);
 })->middleware(['auth', 'verified'])->name('todos');
@@ -36,6 +37,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::post('/todos', [TodoController::class, 'store'])->name('todos.add');
+    Route::put('/todos', [TodoController::class, 'edit'])->name('todos.edit');
 });
 
 require __DIR__ . '/auth.php';
