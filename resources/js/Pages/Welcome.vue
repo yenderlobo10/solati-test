@@ -203,7 +203,7 @@ defineProps({
 
                             <p class="mt-4 text-gray-500 dark:text-gray-400 text-xl leading-relaxed">
                                 Environment
-                                <ul class="text-gray-300 text-sm">
+                                <ul class="text-gray-400 text-sm">
                                     <li>Application Name .......................................................
                                         SolatiTest
                                     </li>
@@ -219,7 +219,7 @@ defineProps({
                                     <li>Database ...................................................................
                                         pgsql
                                     </li>
-                                    <li>Database ............................................... Inertial.js/Vue.js +
+                                    <li>Front-End ............................................... Inertial.js/Vue.js +
                                         Tailwind CSS
                                     </li>
                                 </ul>

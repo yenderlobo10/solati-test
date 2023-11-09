@@ -104,8 +104,8 @@ function deleteTodo(id) {
 
                 <div class="grid grid-cols-3 gap-4" v-if="todos">
 
-                    <div v-for="todo in todos" class="flex flex-col bg-white rounded-lg p-4 shadow"
-                         :class="{ 'bg-green-200': todo.finished }">
+                    <div v-for="todo in todos" class="flex flex-col rounded-lg p-4 shadow"
+                         :class="[ todo.finished ? 'bg-green-200' : 'bg-white' ]">
                         <h4 class="text-lg font-semibold text-slate-800">{{ todo.title }}</h4>
                         <p v-if="todo.description" class="text-base text-slate-700 flex-1">{{ todo.description }}</p>
                         <div class="flex gap-2 justify-end">
