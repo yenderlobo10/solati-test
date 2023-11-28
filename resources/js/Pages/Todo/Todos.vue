@@ -14,18 +14,24 @@ import TodoFormEdit from "@/Pages/Todo/Partials/TodoFormEdit.vue";
 
 library.add(faPenToSquare, faTrashCan);
 const props = defineProps({
-    userId: {type: String}
+    userId: {type: String},
+    token: {type: String}
 });
 
 const todos = ref([]);
 const todoEditing = ref(null);
 const showEditModal = ref(false);
 const isModalEdit = ref(false);
+const authHeader = {
+    'Authorization': `Bearer ${props.token}`
+};
 
 onMounted(() => loadAll());
 
 function loadAll() {
-    axios.get(`/api/todos/${props.userId}`)
+    axios.get(`/api/todos/${props.userId}`, {
+        headers: authHeader
+    })
         .then(response => {
             todos.value = response.data;
         })
@@ -68,7 +74,9 @@ const confirmDelete = (id) => {
 }
 
 function deleteTodo(id) {
-    axios.delete(`/api/todos/${id}`)
+    axios.delete(`/api/todos/${id}`, {
+        headers: authHeader
+    })
         .then(_ => {
             loadAll();
             Swal.fire({

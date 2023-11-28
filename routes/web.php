@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,9 +30,12 @@ Route::get('/', function () {
 
 Route::get('/todos', function () {
     return Inertia::render('Todo/Todos', [
-        'userId' => Auth::user()->id
+        'userId' => Auth::user()->id,
+        'token' => JWTAuth::fromUser(Auth::user()),
     ]);
-})->middleware(['auth', 'verified'])->name('todos');
+})
+    ->middleware(['auth', 'verified'])
+    ->name('todos');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
