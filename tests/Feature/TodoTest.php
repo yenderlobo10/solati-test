@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\Todo;
+namespace Feature;
 
 use App\Models\Todo;
 use App\Models\User;

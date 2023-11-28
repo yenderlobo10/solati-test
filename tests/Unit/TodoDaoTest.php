@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\Todo;
+namespace Tests\Unit;
 
 use App\Dao\TodoDao;
 use App\Dao\TodoDaoImpl;
