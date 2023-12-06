@@ -1,0 +1,47 @@
+name: "compose-laravel-app"
+
+services:
+
+  db:
+    image: postgres
+    container_name: postgres-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=solati
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=1234
+    volumes:
+      - db_data:/var/lib/postgres/data
+    networks:
+      - laravel
+  
+  app:
+    container_name: laravel-app
+    build: .
+    ports:
+      - "8000:8000"
+    networks:
+      - laravel
+    depends_on:
+      - db
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: db-admin
+    ports:
+      - "5050:5050"
+    depends_on:
+      - db
+    networks:
+      - laravel
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=yender@mail.io
+      - PGADMIN_DEFAULT_PASSWORD=1234
+      - PGADMIN_LISTEN_PORT=5050
+
+volumes:
+  db_data:
+  
+networks:
+  laravel:
